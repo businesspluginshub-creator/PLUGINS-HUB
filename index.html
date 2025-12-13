@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PLUGINS HUB | Premium Minecraft Plugins</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #8a2be2;
+            --secondary: #00f7ff;
+            --dark: #0f172a;
+            --darker: #0a0f1f;
+            --light: #f8fafc;
+            --gray: #94a3b8;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--darker), #1e1b4b, var(--darker));
+            color: var(--light);
+            min-height: 100vh;
+            padding: 20px;
+            background-attachment: fixed;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        /* Animated Background Elements */
+        .bg-element {
+            position: fixed;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(138,43,226,0.15) 0%, transparent 70%);
+            z-index: -1;
+        }
+        
+        .bg-element-1 {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: 5%;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .bg-element-2 {
+            width: 200px;
+            height: 200px;
+            bottom: 15%;
+            right: 10%;
+            background: radial-gradient(circle, rgba(0,247,255,0.15) 0%, transparent 70%);
+            animation: float 8s ease-in-out infinite reverse;
+        }
+        
+        .bg-element-3 {
+            width: 150px;
+            height: 150px;
+            top: 40%;
+            right: 25%;
+            animation: float 7s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+        
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            position: relative;
+            margin-bottom: 40px;
+        }
+        
+        .logo {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            color: var(--secondary);
+            text-shadow: 0 0 20px rgba(0, 247, 255, 0.5);
+        }
+        
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, var(--secondary), #ff6b6b, var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+        
+        .price-range {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.8rem;
+            font-weight: bold;
+            padding: 10px 25px;
+            border-radius: 50px;
+            margin: 20px 0;
+            box-shadow: 0 0 30px rgba(138, 43, 226, 0.3);
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 12px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+        }
+        
+        .nav-btn.active, .nav-btn:hover {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border-color: transparent;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(138, 43, 226, 0.3);
+        }
+        
+        .section {
+            display: none;
+            animation: fadeInUp 0.6s ease;
+            margin-bottom: 60px;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .plugins-section {
+            background: rgba(15, 23, 42, 0.7);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .section-title {
+            font-size: 2.8rem;
+            margin-bottom: 40px;
+            text-align: center;
+            background: linear-gradient(45deg, var(--secondary), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .plugin-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .plugin-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .plugin-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+        
+        .plugin-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .plugin-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(138, 43, 226, 0.2);
+            border-color: rgba(138, 43, 226, 0.3);
+        }
+        
+        .plugin-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+        
+        .plugin-name {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+        
+        .plugin-description {
+            margin-bottom: 20px;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+        
+        .plugin-versions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+        
+        .version-tag {
+            background: rgba(138, 43, 226, 0.2);
+            color: var(--secondary);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(138, 43, 226, 0.3);
+        }
+        
+        .order-btn {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .order-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(138, 43, 226, 0.4);
+            border-color: var(--secondary);
+        }
+        
+        .features-section {
+            background: rgba(15, 23, 42, 0.7);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature {
+            text-align: center;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .feature:hover {
+            transform: translateY(-10px);
+            background: rgba(138, 43, 226, 0.1);
+            border-color: var(--primary);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .feature-title {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+        
+        .pricing-section {
+            background: rgba(15, 23, 42, 0.7);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .price-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .price-card.popular::before {
+            content: 'MOST POPULAR';
+            position: absolute;
+            top: -15px;
+            right: -40px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            padding: 5px 40px;
+            transform: rotate(45deg);
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .price-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px rgba(138, 43, 226, 0.3);
+            border-color: var(--primary);
+        }
+        
+        .price-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+        
+        .price-value {
+            font-size: 3rem;
+            margin: 25px 0;
+            color: var(--secondary);
+            font-weight: 700;
+        }
+        
+        .price-features {
+            list-style: none;
+            margin: 30px 0;
+            text-align: left;
+        }
+        
+        .price-features li {
+            padding: 12px 0;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .price-features li:last-child {
+            border-bottom: none;
+        }
+        
+        .price-features li::before {
+            content: "✓";
+            margin-right: 15px;
+            color: var(--success);
+            font-weight: bold;
+        }
+        
+        .discord-info {
+            background: rgba(15, 23, 42, 0.7);
+            border-radius: 20px;
+            padding: 60px 40px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            margin-bottom: 40px;
+        }
+        
+        .discord-btn {
+            background: linear-gradient(45deg, #5865F2, #7289DA);
+            color: white;
+            border: none;
+            padding: 20px 50px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-top: 30px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .discord-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(88, 101, 242, 0.4);
+        }
+        
+        .faq-section {
+            background: rgba(15, 23, 42, 0.7);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .faq-item {
+            margin-bottom: 25px;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            border-left: 4px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+        
+        .faq-item:hover {
+            background: rgba(138, 43, 226, 0.1);
+            transform: translateX(10px);
+        }
+        
+        .faq-question {
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--secondary);
+            font-size: 1.2rem;
+        }
+        
+        .order-process {
+            background: rgba(15, 23, 42, 0.7);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .step {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .step:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 15px 30px rgba(138, 43, 226, 0.2);
+        }
+        
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            margin: 0 auto 20px;
+        }
+        
+        .contact-section {
+            background: rgba(15, 23, 42, 0.7);
+            border-radius: 20px;
+            padding: 50px 40px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+            opacity: 0.7;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin: 50px 0;
+            text-align: center;
+        }
+        
+        .stat-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            min-width: 200px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--secondary), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .navigation {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .price-value {
+                font-size: 2.5rem;
+            }
+            
+            .stats-container {
+                flex-direction: column;
+            }
+        }
+        
+        /* Animations */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        .glow {
+            text-shadow: 0 0 10px rgba(138, 43, 226, 0.7), 0 0 20px rgba(138, 43, 226, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background Elements -->
+    <div class="bg-element bg-element-1"></div>
+    <div class="bg-element bg-element-2"></div>
+    <div class="bg-element bg-element-3"></div>
+    
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-cube"></i>
+            </div>
+            <h1>PLUGINS HUB</h1>
+            <p class="subtitle">Premium Custom Minecraft Plugins for MC 1.21.1 to 1.21.8</p>
+            <div class="price-range">₹50 - ₹5000+ Affordable Pricing</div>
+        </header>
+        
+        <div class="stats-container">
+            <div class="stat-item">
+                <div class="stat-number">500+</div>
+                <div>Happy Clients</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">1000+</div>
+                <div>Plugins Delivered</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">24/7</div>
+                <div>Support Available</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">5★</div>
+                <div>Avg Rating</div>
+            </div>
+        </div>
+        
+        <div class="navigation">
+            <button class="nav-btn active" onclick="showSection('plugins')">Plugins</button>
+            <button class="nav-btn" onclick="showSection('pricing')">Pricing</button>
+            <button class="nav-btn" onclick="showSection('features')">Features</button>
+            <button class="nav-btn" onclick="showSection('process')">Order Process</button>
+            <button class="nav-btn" onclick="showSection('faq')">FAQ</button>
+            <button class="nav-btn" onclick="showSection('contact')">Contact</button>
+        </div>
+        
+        <section id="plugins" class="section active">
+            <div class="plugins-section">
+                <h2 class="section-title">Premium Plugin Services</h2>
+                <div class="plugin-grid">
+                    <div class="plugin-card">
+                        <div class="plugin-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3 class="plugin-name">Starter Commands</h3>
+                        <p class="plugin-description">Essential server commands like /heal, /fly, /rtp, /home. Perfect for new servers.</p>
+                        <div class="plugin-versions">
+                            <span class="version-tag">₹50-200</span>
+                            <span class="version-tag">1.21.1</span>
+                            <span class="version-tag">1.21.2</span>
+                            <span class="version-tag">1.21.3</span>
+                        </div>
+                        <button class="order-btn" onclick="openDiscord()">
+                            <i class="fab fa-discord"></i> Order Now
+                        </button>
+                    </div>
+                    
+                    <div class="plugin-card">
+                        <div class="plugin-icon">
+                            <i class="fas fa-coins"></i>
+                        </div>
+                        <h3 class="plugin-name">Economy System</h3>
+                        <p class="plugin-description">Complete economy with shops, banks, player trading, and custom currency systems.</p>
+                        <div class="plugin-versions">
+                            <span class="version-tag">₹200-500</span>
+                            <span class="version-tag">1.21.1-1.21.8</span>
+                        </div>
+                        <button class="order-btn" onclick="openDiscord()">
+                            <i class="fab fa-discord"></i> Order Now
+                        </button>
+                    </div>
+                    
+                    <div class="plugin-card">
+                        <div class="plugin-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 class="plugin-name">Staff Utilities</h3>
+                        <p class="plugin-description">Admin tools including freeze, teleport, vanish, reports, and advanced moderation.</p>
+                        <div class="plugin-versions">
+                            <span class="version-tag">₹150-400</span>
+                            <span class="version-tag">1.21.1-1.21.8</span>
+                        </div>
+                        <button class="order-btn" onclick="openDiscord()">
+                            <i class="fab fa-discord"></i> Order Now
+                        </button>
+                    </div>
+                    
+                    <div class="plugin-card">
+                        <div class="plugin-icon">
+                            <i class="fas fa-mountain"></i>
+                        </div>
+                        <h3 class="plugin-name">Skyblock Island</h3>
+                        <p class="plugin-description">Complete Skyblock game mode with island management, progression, and challenges.</p>
+                        <div class="plugin-versions">
+                            <span class="version-tag">₹500-1200</span>
+                            <span class="version-tag">1.21.1-1.21.8</span>
+                        </div>
+                        <button class="order-btn" onclick="openDiscord()">
+                            <i class="fab fa-discord"></i> Order Now
+                        </button>
+                    </div>
+                    
+                    <div class="plugin-card">
+                        <div class="plugin-icon">
+                            <i class="fas fa-fist-raised"></i>
+                        </div>
+                        <h3 class="plugin-name">Factions Server</h3>
+                        <p class="plugin-description">Advanced factions with land claiming, alliances, wars, and custom territories.</p>
+                        <div class="plugin-versions">
+                            <span class="version-tag">₹600-1500</span>
+                            <span class="version-tag">1.21.1-1.21.8</span>
+                        </div>
+                        <button class="order-btn" onclick="openDiscord()">
+                            <i class="fab fa-discord"></i> Order Now
+                        </button>
+                    </div>
+                    
+                    <div class="plugin-card">
+                        <div class="plugin-icon">
+                            <i class="fas fa-dragon"></i>
+                        </div>
+                        <h3 class="plugin-name">MMO RPG</h3>
+                        <p class="plugin-description">Massive RPG with classes, skills, quests, dungeons, and progression systems.</p>
+                        <div class="plugin-versions">
+                            <span class="version-tag">₹1500-5000+</span>
+                            <span class="version-tag">1.21.1-1.21.8</span>
+                        </div>
+                        <button class="order-btn" onclick="openDiscord()">
+                            <i class="fab fa-discord"></i> Order Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="pricing" class="section">
+            <div class="pricing-section">
+                <h2 class="section-title">Transparent Pricing</h2>
+                <p style="text-align: center; margin-bottom: 50px; font-size: 1.2rem; opacity: 0.9;">Start from ₹50 and scale based on complexity</p>
+                <div class="pricing-grid">
+                    <div class="price-card">
+                        <h3 class="price-title">Starter Plugin</h3>
+                        <div class="price-value">₹50-200</div>
+                        <p>Perfect for basic server needs</p>
+                        <ul class="price-features">
+                            <li>1-3 custom commands</li>
+                            <li>Basic configuration</li>
+                            <li>Simple features</li>
+                            <li>3-5 days delivery</li>
+                            <li>Minecraft 1.21.1-1.21.8 Support</li>
+                        </ul>
+                        <button class="order-btn" style="margin-top: 20px;" onclick="openDiscord()">
+                            <i class="fab fa-discord"></i> Get Started
+                        </button>
+                    </div>
+                    
+                    <div class="price-card popular">
+                        <h3 class="price-title">Standard Plugin</h3>
+                        <div class="price-value">₹200-500</div>
+                        <p>Ideal for growing servers</p>
+                        <ul class="price-features">
+                            <li>Up to 8 commands</li>
+                            <li>Advanced configuration</li>
+                            <li>Custom GUIs</li>
+                            <li>Database integration</li>
+                            <li>1 week delivery</li>
+                            <li>Minecraft 1.21.1-1.21.8 Support</li>
+                        </ul>
+                        <button class="order-btn" style="margin-top: 20px; background: linear-gradient(45deg, var(--secondary), var(--primary));" onclick="openDiscord()">
+                            <i class="fab fa-discord"></i> Get Started
+                        </button>
+                    </div>
+                    
+                    <div class="price-card">
+                        <h3 class="price-title">Premium Plugin</h3>
+                        <div class="price-value">₹500-1500</div>
+                        <p>For complex custom needs</p>
+                        <ul class="price-features">
+                            <li>Unlimited commands</li>
+                            <li>Database systems</li>
+                            <li>Custom game mechanics</li>
+                            <li>Web panel integration</li>
+                            <li>Real-time support</li>
+                            <li>2-3 weeks delivery</li>
+                        </ul>
+                        <button class="order-btn" style="margin-top: 20px;" onclick="openDiscord()">
+                            <i class="fab fa-discord"></i> Get Started
+                        </button>
+                    </div>
+                    
+                    <div class="price-card">
+                        <h3 class="price-title">Enterprise</h3>
+                        <div class="price-value">₹1500-5000+</div>
+                        <p>Complete server solutions</p>
+                        <ul class="price-features">
+                            <li>Full-featured systems</li>
+                            <li>Multi-plugin coordination</li>
+                            <li>API integrations</li>
+                            <li>Dedicated support</li>
+                            <li>Source code included</li>
+                            <li>4-6 weeks delivery</li>
+                        </ul>
+                        <button class="order-btn" style="margin-top: 20px;" onclick="openDiscord()">
+                            <i class="fab fa-discord"></i> Get Started
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="features" class="section">
+            <div class="features-section">
+                <h2 class="section-title">Why Choose PLUGINS HUB?</h2>
+                <div class="feature-list">
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3 class="feature-title">Lightning Fast</h3>
+                        <p>Quick turnaround times even for complex plugins</p>
+                    </div>
+                    
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3 class="feature-title">Clean Code</h3>
+                        <p>Well-optimized, maintainable code with documentation</p>
+                    </div>
+                    
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 class="feature-title">Secure & Safe</h3>
+                        <p>No payment upfront - pay after complete satisfaction</p>
+                    </div>
+                    
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        <h3 class="feature-title">Free Updates</h3>
+                        <p>Automatic updates for new Minecraft versions</p>
+                    </div>
+                    
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-rupee-sign"></i>
+                        </div>
+                        <h3 class="feature-title">Affordable</h3>
+                        <p>Competitive prices from ₹50 to ₹5000+</p>
+                    </div>
+                    
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h3 class="feature-title">24/7 Support</h3>
+                        <p>Ongoing assistance even after completion</p>
+                    </div>
+                    
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <h3 class="feature-title">Proven Track Record</h3>
+                        <p>500+ satisfied clients served by PLUGINS HUB</p>
+                    </div>
+                    
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <h3 class="feature-title">Premium Quality</h3>
+                        <p>Professional-grade plugins with advanced features</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="process" class="section">
+            <div class="order-process">
+                <h2 class="section-title">Simple 4-Step Process</h2>
+                <p style="text-align: center; margin-bottom: 50px; font-size: 1.2rem; opacity: 0.9;">From idea to finished plugin in just a few steps</p>
+                
+                <div class="process-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3>Connect</h3>
+                        <p>Join our Discord server and create a ticket</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3>Discuss</h3>
+                        <p>Share your requirements and budget (₹50-5000+)</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3>Confirm</h3>
+                        <p>Type #yes to confirm your order interest</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <h3>Receive</h3>
+                        <p>Premium plugin delivered to your server</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="faq" class="section">
+            <div class="faq-section">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">What's your pricing range?</div>
+                    <div class="faq-answer">Our prices start from ₹50 for simple plugins and go up to ₹5000+ for complex enterprise solutions, depending on complexity and features.</div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">What Minecraft versions do you support?</div>
+                    <div class="faq-answer">We support Minecraft 1.21.1 to 1.21.8. All plugins are version-compatible and optimized for performance.</div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Do you offer refunds?</div>
+                    <div class="faq-answer">Since we don't charge upfront, you can cancel anytime before work begins. We only request payment after you're completely satisfied with the finished product.</div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">How long does development take?</div>
+                    <div class="faq-answer">Time varies by complexity: Starter (3-5 days), Standard (1 week), Premium (2-3 weeks), Enterprise (4-6 weeks).</div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Will my plugin receive updates?</div>
+                    <div class="faq-answer">Yes! All plugins receive free updates for Minecraft version changes at no additional cost.</div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Can I request changes after completion?</div>
+                    <div class="faq-answer">Minor changes are free of charge. Major revisions may incur an additional fee, which we'll discuss beforehand.</div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Do you provide source code?</div>
+                    <div class="faq-answer">Source code is available for an additional fee. All standard deliveries include compiled plugin files ready for your server.</div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">What makes you different from others?</div>
+                    <div class="faq-answer">We offer competitive pricing starting from ₹50, premium quality code, 24/7 support, free updates, and no upfront payment. Our 500+ satisfied clients speak for our quality.</div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="contact" class="section">
+            <div class="discord-info">
+                <h2 class="section-title">Ready to Transform Your Server?</h2>
+                <p style="font-size: 1.4rem; margin-bottom: 20px;">Join our community of satisfied server owners</p>
+                <p>Connect with us on Discord to discuss your project and budget</p>
+                <p>We serve clients worldwide with affordable pricing from ₹50 to ₹5000+</p>
+                <button class="discord-btn" onclick="openDiscord()">
+                    <i class="fab fa-discord"></i> Join Our Discord Server
+                </button>
+            </div>
+        </section>
+        
+        <footer>
+            <p>&copy; 2025 PLUGINS HUB. All rights reserved.</p>
+            <p style="margin-top: 10px;">Premium Minecraft Plugin Development • ₹50 to ₹5000+</p>
+        </footer>
+    </div>
+    
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active class from all nav buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Activate corresponding nav button
+            event.target.classList.add('active');
+        }
+        
+        function openDiscord() {
+            window.open('https://discord.gg/pScTvCyWnb', '_blank');
+        }
+        
+        // Add some interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add pulse animation to buttons on hover
+            const buttons = document.querySelectorAll('.order-btn, .discord-btn, .nav-btn');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    this.classList.add('pulse');
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    this.classList.remove('pulse');
+                });
+            });
+            
+            // Add glow effect to headers on scroll
+            window.addEventListener('scroll', function() {
+                const sections = document.querySelectorAll('.section-title');
+                sections.forEach(section => {
+                    const rect = section.getBoundingClientRect();
+                    if (rect.top <= window.innerHeight/2 && rect.bottom >= window.innerHeight/2) {
+                        section.classList.add('glow');
+                        setTimeout(() => {
+                            section.classList.remove('glow');
+                        }, 1000);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
