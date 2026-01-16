@@ -1,0 +1,61 @@
+{
+  "name": "Auto Server Shutdown",
+  "description": "Automatically shuts down the Minecraft server after a specified time period",
+  "version": "1.0.0",
+  "author": "Server Admin",
+  "category": "Utility",
+  "settings": [
+    {
+      "name": "shutdown_time_minutes",
+      "label": "Shutdown Time (minutes)",
+      "type": "number",
+      "default": 8,
+      "description": "Number of minutes after which the server will automatically shut down"
+    },
+    {
+      "name": "warning_message",
+      "label": "Warning Message",
+      "type": "text",
+      "default": "Server will shutdown in {time} minutes!",
+      "description": "Message to broadcast before shutdown"
+    },
+    {
+      "name": "enable_warning",
+      "label": "Enable Warning",
+      "type": "boolean",
+      "default": true,
+      "description": "Show warning messages before shutdown"
+    }
+  ],
+  "hooks": [
+    {
+      "event": "onServerStart",
+      "actions": [
+        {
+          "type": "schedule_task",
+          "delay_minutes": "{settings.shutdown_time_minutes}",
+          "action": {
+            "type": "broadcast_message",
+            "message": "Server is shutting down now!"
+          }
+        },
+        {
+          "type": "schedule_task",
+          "delay_minutes": "{settings.shutdown_time_minutes}",
+          "action": {
+            "type": "stop_server"
+          }
+        }
+      ]
+    }
+  ],
+  "permissions": [
+    "server.control.stop"
+  ],
+  "dependencies": [],
+  "tags": [
+    "utility",
+    "automation",
+    "maintenance"
+  ]
+}
